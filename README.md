@@ -1,65 +1,21 @@
-Project Instructions
-Perform exploratory data analysis on the netflix_data.csv data to understand more about movies from the 1990s decade.
+**Netflix Movie Data Analysis Project**
+_Overview_
+This project focuses on analyzing Netflix movie data to uncover trends in movie durations over the years. The analysis includes data cleaning, preprocessing, and visualization using Python's Pandas and Matplotlib libraries.
 
-What was the most frequent movie duration in the 1990s? Save an approximate answer as an integer called duration.
+_Features Explored_
+Data Cleaning and Preprocessing: The dataset was cleaned to handle missing values and format inconsistencies. Preprocessing involved converting data types and extracting relevant features for analysis.
 
-A movie is considered short if it is less than 90 minutes. Count the number of short action movies released in the 1990s and save this integer as short_movie_count.
-import pandas as pd
+_Visualization_: Utilizing Matplotlib, various visualizations were created to explore relationships between movie durations and release years. Scatter plots and color-coded genre distinctions were used to highlight patterns and trends over time.
 
-# Load the data and store as netflix_df.
-netflix_df = pd.read_csv('netflix_data.csv')
+**Tools and Libraries Used**
+_Python:_ I used it for data manipulation and analysis.
+Pandas: Data loading, cleaning, and transformation.
+Matplotlib: Creating visualizations such as scatter plots to depict trends.
+_Insights_
+The project aimed to answer questions such as _whether movie durations have changed significantly over recent years_ and _if there are genre-specific patterns in movie durations_. Insights gained from the analysis contribute to understanding trends in Netflix's movie offerings over time.
 
-# Filter out TV Shows and store it  as netflix_subset
-netflix_subset = netflix_df[netflix_df['type'] == 'Movie']
+Future Enhancements
+Future iterations of this project could include more advanced analytics, such as _machine learning models_ to predict movie durations based on genre or other features, or exploring additional datasets to enrich the analysis.
 
-# Keep only specific columns
-netflix_movies = netflix_subset[['title', 'country', 'genre', 'release_year', 'duration']]
-
-# Convert 'duration' to numeric, assuming it's in the format "xx min"
-if netflix_movies['duration'].dtype == 'object':
-    netflix_movies['duration'] = pd.to_numeric(netflix_movies['duration'].str.replace(' min', '').str.strip(), errors='coerce')
-
-# Filter for movies shorter than 60 minutes
-short_movies = netflix_movies[netflix_movies['duration'] < 60]
-print(short_movies)
-import matplotlib.pyplot as plt
-
-# Create colors based on genre
-colors = []
-for _, row in netflix_movies.iterrows():
-    if 'Children' in row['genre']:
-        colors.append('blue')
-    elif 'Documentaries' in row['genre']:
-        colors.append('yellow')
-    elif 'Stand-Up' in row['genre']:
-        colors.append('green')
-    else:
-        colors.append('brown')
-
-# Plotting
-fig, bx= plt.subplots()
-bx.scatter(netflix_movies['release_year'], netflix_movies['duration'], c=colors)
-bx.set_title('Movie Duration by Year of Release')
-bx.set_xlabel('Release year')
-bx.set_ylabel('Duration (min)')
-plt.show()
-# Answering the question based on your visual interpretation of the plot
-answer = "no"  # Change to "yes" if you conclude movies are getting shorter
-
-title  ... duration
-35                                            #Rucker50  ...       56
-55                  100 Things to do Before High School  ...       44
-67    13TH: A Conversation with Oprah Winfrey & Ava ...  ...       37
-101                                   3 Seconds Divorce  ...       53
-146                                      A 3 Minute Hug  ...       28
-...                                                 ...  ...      ...
-7679                    WWII: Report from the Aleutians  ...       45
-7692  Ya no estoy aquí: Una conversación entre Guill...  ...       15
-7718                     Yoo Byung Jae: Discomfort Zone  ...       54
-7771                                               Zion  ...       12
-7784                                  Zulu Man in Japan  ...       44
-
-[420 rows x 5 columns]
-
-
-
+Motivation
+This analysis was conducted with the goal of gaining practical experience in data analysis techniques while exploring trends in entertainment content, reflecting a broader interest in leveraging data to understand cultural and industry trends.
